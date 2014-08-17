@@ -1,4 +1,4 @@
-# GitHub Quickstart
+# vagrant-metadata
 
 <img src="https://rawgit.com/lvillani/vagrant-metadata/master/logo.svg" align="right" width="200" height="200"/>
 
