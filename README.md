@@ -4,11 +4,9 @@
 
 _Creates and updates Vagrant box metadata files (metadata.json)_
 
-[![Build Status](https://travis-ci.org/lvillani/vagrant-metadata.svg?branch=master)](https://travis-ci.org/lvillani/vagrant-metadata)
-[![Coverage Status](http://img.shields.io/coveralls/lvillani/vagrant-metadata.svg)](https://coveralls.io/r/lvillani/vagrant-metadata)
-[![Gittip](http://img.shields.io/gittip/lvillani.svg)](https://www.gittip.com/lvillani/)
-[![License](http://img.shields.io/badge/license-MIT-blue.svg)](http://choosealicense.com/licenses/mit/)
-[![Stories in Ready](https://badge.waffle.io/lvillani/vagrant-metadata.svg)](https://waffle.io/lvillani/vagrant-metadata)
+[![Build Status](https://img.shields.io/travis/lvillani/vagrant-metadata.svg?style=flat)](https://travis-ci.org/lvillani/vagrant-metadata)
+[![Coverage Status](http://img.shields.io/coveralls/lvillani/vagrant-metadata.svg?style=flat)](https://coveralls.io/r/lvillani/vagrant-metadata)
+[![License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://choosealicense.com/licenses/mit/)
 
 --------------------------------------------------------------------------------
 
@@ -97,11 +95,3 @@ At this point simply go to the `precise64` and run `vagrant-metadata`:
 
 See? We don't even have to specify the box name, description or base URL! Sync this directory with
 your remote server and you are done.
-
-
-## Donating
-
-Support this project and [others by Lorenzo Villani](https://github.com/lvillani/) via
-[gittip](https://www.gittip.com/lvillani/).
-
-[![Support via Gittip](https://cdn.rawgit.com/lvillani/gittip-badge/v1.0.0/dist/gittip.svg)](https://www.gittip.com/lvillani/)
