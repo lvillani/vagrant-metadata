@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name="vagrant-metadata",
-      version="1.0.0",
+      version="1.0.1",
       description="Vagrant metadata.json generator",
       url="https://github.com/lvillani/vagrant-metadata/",
       author="Lorenzo Villani",
