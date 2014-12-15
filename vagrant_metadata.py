@@ -52,12 +52,12 @@ def process_directory(root, metadata, force=False):
         ("versions", []),
     ])
 
-    for version_dir in all_directories_in(root):
+    for version_dir in sorted(all_directories_in(root)):
         version = os.path.basename(version_dir)
         version_data = get_version_data(version, metadata)
         version_ret = get_version_data(version, ret)
 
-        for provider_dir in all_directories_in(version_dir):
+        for provider_dir in sorted(all_directories_in(version_dir)):
             box = box_in(provider_dir)
             provider = os.path.basename(provider_dir)
             provider_data = get_provider_data(provider, version_data).copy()
