@@ -13,7 +13,7 @@ _Creates and updates Vagrant box metadata files (metadata.json)_
 An utility program which creates and updates Vagrant
 [box metadata files](http://docs.vagrantup.com/v2/boxes/format.html). This program is meant for
 small-scale deployment and versioning of Vagrant base boxes to private servers. For large scale
-deployment it always better to just use [Vagrant Cloud](https://vagrantcloud.com/).
+deployment it always better to just use [Atlas](https://atlas.hashicorp.com/).
 
 
 ## Usage
@@ -88,10 +88,11 @@ directory with the same layout as before and copy your boxes there ending up wit
         │       └── precise64.box
         └── metadata.json
 
-At this point simply go to the `precise64` and run `vagrant-metadata`:
+At this point simply go to the `precise64` directory and run `vagrant-metadata`:
 
     cd precise64
     vagrant-metadata
 
-See? We don't even have to specify the box name, description or base URL! Sync this directory with
-your remote server and you are done.
+Notice that we don't even have to specify the box name, description or base URL.
+
+Sync this directory with your remote server and you are done.
