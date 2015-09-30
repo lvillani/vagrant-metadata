@@ -57,8 +57,10 @@ def main():
             ("versions", []),
         ])
 
+    metadata = process_directory(".", metadata, args.force)
+
     with open("metadata.json", "w") as f:
-        json.dump(process_directory(".", metadata, args.force), f, indent=4)
+        json.dump(metadata, f, indent=4)
 
 
 def parse_args():
