@@ -71,8 +71,8 @@ somewhere.
 ### Updating a Box
 
 Updating a box is easier than preparing a new one for publication. Let's suppose we want to
-publish version `2.0.0` of the `precise64` box described before: simply create a new `2.0.0`
-directory with the same layout as before and copy your boxes there ending up with something like:
+publish version `2.0.0` of the `precise64` box described before: create a new `2.0.0` directory
+with the same layout as before and copy your boxes there ending up with something like:
 
     .
     └── precise64
@@ -88,7 +88,7 @@ directory with the same layout as before and copy your boxes there ending up wit
         │       └── precise64.box
         └── metadata.json
 
-At this point simply go to the `precise64` directory and run `vagrant-metadata`:
+At this point go to the `precise64` directory and run `vagrant-metadata`:
 
     cd precise64
     vagrant-metadata
