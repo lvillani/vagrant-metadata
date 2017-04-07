@@ -57,7 +57,21 @@ def main():
             ("versions", []),
         ])
 
-    metadata = process_directory(".", metadata, args.force)
+    local_metadata = process_directory(".", metadata, args.force)
+
+    # Update existing metadata.json
+    if args.append:
+        current_versions = map(lambda _: _["version"], metadata["versions"])
+
+        for version in local_metadata["versions"]:
+            if version["version"] not in current_versions:
+                metadata["versions"].append(version)
+
+        metadata["baseurl"] = local_metadata["baseurl"]
+        metadata["description"] = local_metadata["description"]
+        metadata["name"] = local_metadata["name"]
+    else:
+        metadata = local_metadata
 
     with open("metadata.json", "w") as f:
         json.dump(metadata, f, indent=4)
@@ -69,6 +83,7 @@ def parse_args():
     args_parser.add_argument("-f", "--force", action="store_true")
     args_parser.add_argument("-n", "--name", type=str)
     args_parser.add_argument("-u", "--baseurl", type=str)
+    args_parser.add_argument("-a", "--append", action="store_true")
 
     return args_parser.parse_args()
 

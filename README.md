@@ -96,3 +96,7 @@ At this point go to the `precise64` directory and run `vagrant-metadata`:
 Notice that we don't even have to specify the box name, description or base URL.
 
 Sync this directory with your remote server and you are done.
+
+If you don't have all box files downloaded locally, and want to add new version
+to existing metadata.json simply add `--append` (`-a`) option to only add new
+version box to existing metadata
