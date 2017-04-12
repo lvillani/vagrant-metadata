@@ -34,7 +34,7 @@ import os
 import os.path
 import sys
 
-from vagrant_metadata import *
+from vagrant_metadata import process_directory
 
 
 def main():
