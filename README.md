@@ -4,8 +4,7 @@
 
 _Creates and updates Vagrant box metadata files (metadata.json)_
 
-[![Build Status](https://travis-ci.com/lvillani/vagrant-metadata.svg?branch=master)](https://travis-ci.com/lvillani/vagrant-metadata)
-[![Coverage Status](http://img.shields.io/coveralls/lvillani/vagrant-metadata.svg?style=flat)](https://coveralls.io/r/lvillani/vagrant-metadata)
+[![Build Status](https://dev.azure.com/EuRLdC3BDg/vagrant-metadata/_apis/build/status/vagrant-metadata?branchName=master)](https://dev.azure.com/EuRLdC3BDg/vagrant-metadata/_build/latest?definitionId=7&branchName=master)
 [![License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://choosealicense.com/licenses/mit/)
 
 --------------------------------------------------------------------------------
