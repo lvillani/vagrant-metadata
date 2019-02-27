@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # The MIT License (MIT)
 #
-# Copyright (c) 2014 Lorenzo Villani
+# Copyright (c) 2019 Lorenzo Villani
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -45,12 +44,14 @@ def process_directory(root, metadata, force=False):
     new fields.
 
     """
-    ret = collections.OrderedDict([
-        ("name", metadata["name"]),
-        ("description", metadata["description"]),
-        ("baseurl", metadata["baseurl"]),
-        ("versions", []),
-    ])
+    ret = collections.OrderedDict(
+        [
+            ("name", metadata["name"]),
+            ("description", metadata["description"]),
+            ("baseurl", metadata["baseurl"]),
+            ("versions", []),
+        ]
+    )
 
     for version_dir in sorted(all_directories_in(root)):
         version = os.path.basename(version_dir)
@@ -64,7 +65,10 @@ def process_directory(root, metadata, force=False):
 
             if not provider_data["checksum"] and not force:
                 provider_data["checksum"] = compute_sha1(box)
-                provider_data["url"] = "%s/%s" % (metadata["baseurl"], os.path.relpath(box, root))
+                provider_data["url"] = "%s/%s" % (
+                    metadata["baseurl"],
+                    os.path.relpath(box, root),
+                )
 
             version_ret["providers"].append(provider_data)
 
@@ -78,7 +82,11 @@ def all_directories_in(path):
 
 
 def box_in(path):
-    boxes = [join(path, f) for f in os.listdir(path) if f.endswith(".box") and os.path.isfile(join(path, f))]
+    boxes = [
+        join(path, f)
+        for f in os.listdir(path)
+        if f.endswith(".box") and os.path.isfile(join(path, f))
+    ]
 
     if len(boxes) != 1:
         raise BoxCountError("Was expecting exactly one box: %s" % path)
@@ -87,19 +95,28 @@ def box_in(path):
 
 
 def get_version_data(want_version, metadata):
-    return find_in_collection(metadata["versions"], "version", want_version, collections.OrderedDict([
-        ("version", want_version),
-        ("providers", []),
-    ]))
+    return find_in_collection(
+        metadata["versions"],
+        "version",
+        want_version,
+        collections.OrderedDict([("version", want_version), ("providers", [])]),
+    )
 
 
 def get_provider_data(want_provider, version_data):
-    return find_in_collection(version_data["providers"], "name", want_provider, collections.OrderedDict([
-        ("name", want_provider),
-        ("checksum_type", "sha1"),
-        ("checksum", ""),
-        ("url", ""),
-    ]))
+    return find_in_collection(
+        version_data["providers"],
+        "name",
+        want_provider,
+        collections.OrderedDict(
+            [
+                ("name", want_provider),
+                ("checksum_type", "sha1"),
+                ("checksum", ""),
+                ("url", ""),
+            ]
+        ),
+    )
 
 
 def find_in_collection(collection, primary_key, where, default):
@@ -113,7 +130,7 @@ def find_in_collection(collection, primary_key, where, default):
 def compute_sha1(path):
     algo = hashlib.sha1()
 
-    with open(path, 'rb') as f:
+    with open(path, "rb") as f:
         buf = f.read(algo.block_size)
 
         while len(buf):
