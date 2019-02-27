@@ -35,36 +35,42 @@ TEST_METADATA = {
     "baseurl": "http://example.com",
     "name": "hashicorp/precise64",
     "description": "This box contains Ubuntu 12.04 LTS 64-bit.",
-    "versions": [{
-        "version": "1.0.0",
-        "providers": [{
-            "name": "virtualbox",
-            "url": "http://example.com/1.0.0/virtualbox/precise64_virtualbox.box",
-            "checksum_type": "sha1",
-            "checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "versions": [
+        {
+            "version": "1.0.0",
+            "providers": [
+                {
+                    "name": "virtualbox",
+                    "url": "http://example.com/1.0.0/virtualbox/precise64_virtualbox.box",
+                    "checksum_type": "sha1",
+                    "checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+                },
+                {
+                    "name": "vmware_desktop",
+                    "url": "http://example.com/1.0.0/vmware_desktop/precise64_vmware_desktop.box",
+                    "checksum_type": "sha1",
+                    "checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+                },
+            ],
         },
         {
-            "name": "vmware_desktop",
-            "url": "http://example.com/1.0.0/vmware_desktop/precise64_vmware_desktop.box",
-            "checksum_type": "sha1",
-            "checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
-        }]
-    },
-    {
-        "version": "2.0.0",
-        "providers": [{
-            "name": "virtualbox",
-            "url": "http://example.com/2.0.0/virtualbox/precise64_virtualbox.box",
-            "checksum_type": "sha1",
-            "checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+            "version": "2.0.0",
+            "providers": [
+                {
+                    "name": "virtualbox",
+                    "url": "http://example.com/2.0.0/virtualbox/precise64_virtualbox.box",
+                    "checksum_type": "sha1",
+                    "checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+                },
+                {
+                    "name": "vmware_desktop",
+                    "url": "http://example.com/2.0.0/vmware_desktop/precise64_vmware_desktop.box",
+                    "checksum_type": "sha1",
+                    "checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+                },
+            ],
         },
-        {
-            "name": "vmware_desktop",
-            "url": "http://example.com/2.0.0/vmware_desktop/precise64_vmware_desktop.box",
-            "checksum_type": "sha1",
-            "checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
-        }]
-    }]
+    ],
 }
 
 
@@ -73,26 +79,31 @@ def test_compute_sha1():
 
 
 def test_all_directories_in(boxtree):
-    assert v.all_directories_in(boxtree['box_empty']) == []
-    assert v.all_directories_in(boxtree['box_one']) == []
-    assert v.all_directories_in(boxtree['box_dir']) == [os.path.join(boxtree['box_dir'], 'test.box')]
+    assert v.all_directories_in(boxtree["box_empty"]) == []
+    assert v.all_directories_in(boxtree["box_one"]) == []
+    assert v.all_directories_in(boxtree["box_dir"]) == [
+        os.path.join(boxtree["box_dir"], "test.box")
+    ]
 
-    dirs = sorted(v.all_directories_in(boxtree['root']))
-    expected = [os.path.join(boxtree['root'], d) for d in ['box_dir', 'box_empty', 'box_multi', 'box_one']]
+    dirs = sorted(v.all_directories_in(boxtree["root"]))
+    expected = [
+        os.path.join(boxtree["root"], d)
+        for d in ["box_dir", "box_empty", "box_multi", "box_one"]
+    ]
 
     assert dirs == expected
 
 
 def test_box_in(boxtree):
-    assert v.box_in(boxtree['box_one']) == os.path.join(boxtree['box_one'], 'test.box')
+    assert v.box_in(boxtree["box_one"]) == os.path.join(boxtree["box_one"], "test.box")
 
 
 def test_box_in_no_boxes(boxtree):
     with pytest.raises(v.BoxCountError):
-        v.box_in(boxtree['box_empty'])
+        v.box_in(boxtree["box_empty"])
 
     with pytest.raises(v.BoxCountError):
-        v.box_in(boxtree['box_multi'])
+        v.box_in(boxtree["box_multi"])
 
 
 @pytest.fixture
@@ -104,43 +115,40 @@ def boxtree(tmpdir):
 
     """
     # Create several test directories, each containing a variable number of (empty) '.box' files.
-    box_empty = makedirs(os.path.join(str(tmpdir), 'box_empty'))
-    box_multi = makedirs(os.path.join(str(tmpdir), 'box_multi'))
-    box_one = makedirs(os.path.join(str(tmpdir), 'box_one'))
+    box_empty = makedirs(os.path.join(str(tmpdir), "box_empty"))
+    box_multi = makedirs(os.path.join(str(tmpdir), "box_multi"))
+    box_one = makedirs(os.path.join(str(tmpdir), "box_one"))
 
-    touch(os.path.join(box_one, 'test.box'))
-    touch(os.path.join(box_multi, 'test1.box'))
-    touch(os.path.join(box_multi, 'test2.box'))
+    touch(os.path.join(box_one, "test.box"))
+    touch(os.path.join(box_multi, "test1.box"))
+    touch(os.path.join(box_multi, "test2.box"))
 
     # Create a '.box' directory instead of a file.
-    box_dir = makedirs(os.path.join(str(tmpdir), 'box_dir'))
+    box_dir = makedirs(os.path.join(str(tmpdir), "box_dir"))
 
-    makedirs(os.path.join(box_dir, 'test.box'))
+    makedirs(os.path.join(box_dir, "test.box"))
 
     return {
-        'root': str(tmpdir),
-        'box_dir': box_dir,
-        'box_empty': box_empty,
-        'box_multi': box_multi,
-        'box_one': box_one,
+        "root": str(tmpdir),
+        "box_dir": box_dir,
+        "box_empty": box_empty,
+        "box_multi": box_multi,
+        "box_one": box_one,
     }
 
 
 def test_find_in_collection():
     collection = [
-        {
-            "pkey": "a value",
-            "data": "Satellite data",
-        },
-        {
-            "pkey": "another value",
-            "data": "Satellite data",
-        },
+        {"pkey": "a value", "data": "Satellite data"},
+        {"pkey": "another value", "data": "Satellite data"},
     ]
 
     default = {"pkey": "default when missing"}
 
-    assert v.find_in_collection(collection, "pkey", "a value", default) == {"pkey": "a value", "data": "Satellite data"}
+    assert v.find_in_collection(collection, "pkey", "a value", default) == {
+        "pkey": "a value",
+        "data": "Satellite data",
+    }
     assert v.find_in_collection(collection, "pkey", "missing", default) == default
 
 
@@ -152,18 +160,20 @@ def test_get_version_data():
 
     assert v.get_version_data("1.0.0", TEST_METADATA) == {
         "version": "1.0.0",
-        "providers": [{
-            "name": "virtualbox",
-            "url": "http://example.com/1.0.0/virtualbox/precise64_virtualbox.box",
-            "checksum_type": "sha1",
-            "checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
-        },
-        {
-            "name": "vmware_desktop",
-            "url": "http://example.com/1.0.0/vmware_desktop/precise64_vmware_desktop.box",
-            "checksum_type": "sha1",
-            "checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
-        }]
+        "providers": [
+            {
+                "name": "virtualbox",
+                "url": "http://example.com/1.0.0/virtualbox/precise64_virtualbox.box",
+                "checksum_type": "sha1",
+                "checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+            },
+            {
+                "name": "vmware_desktop",
+                "url": "http://example.com/1.0.0/vmware_desktop/precise64_vmware_desktop.box",
+                "checksum_type": "sha1",
+                "checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+            },
+        ],
     }
 
 
@@ -219,18 +229,25 @@ def mktesttree(tmpdir):
     for v in ["1.0.0", "2.0.0"]:
         version = makedirs(os.path.join(root, v))
         version_virtualbox = makedirs(os.path.join(version, "virtualbox"))
-        version_virtualbox_box = touch(os.path.join(version_virtualbox, "precise64_virtualbox.box"))
+        version_virtualbox_box = touch(
+            os.path.join(version_virtualbox, "precise64_virtualbox.box")
+        )
         version_vmware_desktop = makedirs(os.path.join(version, "vmware_desktop"))
-        version_vmware_desktop_box = touch(os.path.join(version_vmware_desktop, "precise64_vmware_desktop.box"))
+        version_vmware_desktop_box = touch(
+            os.path.join(version_vmware_desktop, "precise64_vmware_desktop.box")
+        )
 
     return root
+
 
 #
 # Utility functions
 #
 
+
 def print_dict(d):
     import pprint
+
     pprint.pprint(json.loads(json.dumps(d)))
 
 
@@ -243,5 +260,5 @@ def makedirs(path):
 
 def touch(path):
     """Creates an empty file (if missing) and updates its timestamp."""
-    with open(path, 'w'):
+    with open(path, "w"):
         os.utime(path, None)

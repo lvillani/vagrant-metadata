@@ -15,5 +15,5 @@ setup(
         "License :: OSI Approved :: MIT License",
     ],
     scripts=["bin/vagrant-metadata"],
-    py_modules=["vagrant_metadata"]
+    py_modules=["vagrant_metadata"],
 )
