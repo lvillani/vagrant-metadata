@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name="vagrant-metadata",
-    version="1.1.1",
+    version="1.1.2",
     description="Vagrant metadata.json generator",
     long_description=open("README.md", "r").read(),
     long_description_content_type="text/markdown",
