@@ -67,7 +67,7 @@ def process_directory(root, metadata, force=False):
                 provider_data["checksum"] = compute_sha1(box)
                 provider_data["url"] = "%s/%s" % (
                     metadata["baseurl"],
-                    "/".join(os.path.relpath(box, root).split(os.sep))
+                    "/".join(os.path.relpath(box, root).split(os.sep)),
                 )
 
             version_ret["providers"].append(provider_data)

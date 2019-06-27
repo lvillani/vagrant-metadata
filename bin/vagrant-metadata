@@ -47,12 +47,14 @@ def main():
         check_arg("description", args)
         check_arg("name", args)
 
-        metadata = collections.OrderedDict([
-            ("name", args.name),
-            ("description", args.description),
-            ("baseurl", args.baseurl),
-            ("versions", []),
-        ])
+        metadata = collections.OrderedDict(
+            [
+                ("name", args.name),
+                ("description", args.description),
+                ("baseurl", args.baseurl),
+                ("versions", []),
+            ]
+        )
 
     local_metadata = process_directory(".", metadata, args.force)
 
