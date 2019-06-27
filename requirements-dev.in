@@ -1,0 +1,4 @@
+black
+isort
+pip-tools
+pylint

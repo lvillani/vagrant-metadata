@@ -1,6 +1,2 @@
-black
-isort
-pip-tools
-pylint
 pytest
 pytest-cov
