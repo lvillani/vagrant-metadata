@@ -4,16 +4,15 @@
 
 _Creates and updates Vagrant box metadata files (metadata.json)_
 
-[![Build Status](https://dev.azure.com/EuRLdC3BDg/vagrant-metadata/_apis/build/status/lvillani.vagrant-metadata?branchName=master)](https://dev.azure.com/EuRLdC3BDg/vagrant-metadata/_build/latest?definitionId=8&branchName=master)
+![Build Status](https://github.com/lvillani/vagrant-metadata/workflows/CI/badge.svg)
 [![License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://choosealicense.com/licenses/mit/)
 
---------------------------------------------------------------------------------
+---
 
 An utility program which creates and updates Vagrant
 [box metadata files](http://docs.vagrantup.com/v2/boxes/format.html). This program is meant for
 small-scale deployment and versioning of Vagrant base boxes to private servers. For large scale
 deployment it always better to just use [Atlas](https://atlas.hashicorp.com/).
-
 
 ## Usage
 
@@ -22,7 +21,6 @@ deployment it always better to just use [Atlas](https://atlas.hashicorp.com/).
 This program requires Python 2.7 and can be installed via PIP:
 
     pip install vagrant-metadata
-
 
 ### Publishing Your First Box
 
@@ -65,7 +63,6 @@ base box such as its URL, name and description:
 After a while, when `vagrant-metadata` exits, you will find a fresh `metadata.json` file which
 contains all the box metadata. At this point you can publish the whole `precise64` directory
 somewhere.
-
 
 ### Updating a Box
 
